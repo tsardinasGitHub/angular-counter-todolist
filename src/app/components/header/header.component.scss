@@ -1,0 +1,33 @@
+header {
+  background-color: #333;
+  padding-inline: 16px;
+  padding-block: 8px;
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: space-between;
+
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > span {
+      cursor: pointer;
+      &:hover {
+        color: #777;
+      }
+    }
+
+    ul {
+      list-style: none;   
+      li {
+        cursor: pointer;
+        &:hover {
+          color: #777;
+        }
+      }
+    }
+  }
+}

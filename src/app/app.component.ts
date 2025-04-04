@@ -1,16 +1,27 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './home/home.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent],
   template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
+    <app-header/>      
+    <main>
+      <router-outlet />
+    </main>
+    
   `,
-  styles: [],
+  styles: [
+    `
+      main {
+        padding: 16px;
+      }
+    `,
+  ],
 })
 export class AppComponent {
   title = 'angular-ecomm';
+  name = 'John Doe';
 }
