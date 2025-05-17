@@ -1,17 +1,31 @@
 <h3>Todos List</h3>
 
-@if (!todoItems().length) {
-<p>Loading ...</p>
-} 
+@if (todoStateService.loading()) {
+<p>Loading todos...</p>
+} @else if (todoStateService.error()) {
+<p class="error">Error: {{ todoStateService.error() }}</p>
+} @else if (!todoStateService.todos().length) {
+<p>No todos found.</p>
+}
 
-<form>
-  <label>Filter Todos</label>
-  <input name="searchTerm" [(ngModel)]="searchTerm" placeholder="Search todos... " />
+<form (submit)="$event.preventDefault()">
+  <div class="add-todo">
+    <input #newTodo placeholder="Add a new todo..." />
+    <button (click)="addTodo(newTodo.value); newTodo.value = ''">Add</button>
+  </div>
+  
+  <div class="filter-todo">
+    <label>Filter Todos</label>
+    <input name="searchTerm" [(ngModel)]="searchTermValue" placeholder="Search todos... " />
+  </div>
 </form>
 
 <ul class="todos">
-  @for (todo of todoItems() | filterTodos: searchTerm(); track todo.id) {
-    <app-todo-item [todo]="todo" (todoToogle)="updateTodoItem($event)"></app-todo-item>
+  @for (todo of todoStateService.todos() | filterTodos: searchTerm(); track todo.id) {
+    <div class="todo-row">
+      <app-todo-item [todo]="todo" (todoToogle)="updateTodoItem($event)"></app-todo-item>
+      <button class="delete-btn" (click)="deleteTodo(todo.id)">X</button>
+    </div>
   }
 </ul>
 

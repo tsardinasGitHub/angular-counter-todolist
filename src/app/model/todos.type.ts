@@ -11,11 +11,27 @@ export type TodoState = {
     error: string | null;
 }
 
-
-export type TodoAction = {
+export type TodoAction = 
+| {
     type: 'ADD_TODO';
     payload: Todo;
-} | {
+} 
+| {
     type: 'DELETE_TODO';
     payload: number;
 }
+| {
+    type: 'TOGGLE_TODO';
+    payload: number;
+}
+| {
+    type: 'LOAD_TODOS';
+    payload: Todo[];
+}
+| {
+    type: 'LOADING_TODOS';
+}
+| {
+    type: 'ERROR_TODOS';
+    payload: string;
+};
